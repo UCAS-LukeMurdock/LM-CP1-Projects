@@ -2,7 +2,7 @@
 
 faculty = 32
 students = 100
-student = students - 1
+students = students - 1
 faculty = faculty - 3
 guests = students * 2
 guests = guests - 15
