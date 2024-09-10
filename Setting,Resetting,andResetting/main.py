@@ -8,6 +8,6 @@ guests = students * 2
 guests = guests - 15
 board = 1
 table = (faculty+students+guests+board)/12
-table = str(table)
+table = str(int(table))
 
-print("You need to bring", table, "tables")
+print("You need", table, "tables.")
