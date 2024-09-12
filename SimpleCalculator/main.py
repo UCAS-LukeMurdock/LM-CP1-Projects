@@ -18,5 +18,7 @@ elif (operation == "//") :
  answer = num1 // num2
 elif (operation == "%") :
  answer = num1 % num2
+else:
+  answer = "error"
 
 print(num1, operation, num2, "=", answer)
