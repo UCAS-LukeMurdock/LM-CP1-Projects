@@ -1,12 +1,22 @@
 #Luke Murdock, Simple Calculator
 
-operation = input("Which operation do you want to do? +, -, *, /, **, ?/, or %?:")
+num1 = int(input("First number?:"))
+operation = input("What operation? (+, -, *, /, **, //, %):")
+num2 = int(input("Second number?:"))
 
-num1 = input("What is your first numebr?:")
-num2 = input("What is your second numebr?:")
+if (operation == "+") :
+ answer = num1 + num2
+elif (operation == "-") :
+ answer = num1 - num2
+elif (operation == "*") :
+ answer = num1 * num2
+elif (operation == "/") :
+ answer = num1 / num2
+elif (operation == "**") :
+ answer = num1 ** num2
+elif (operation == "//") :
+ answer = num1 // num2
+elif (operation == "%") :
+ answer = num1 % num2
 
-num = float(num)
-num = float(num)
-
-answer = num1 operation num2 
-print(answer)
+print(num1, operation, num2, "=", answer)
