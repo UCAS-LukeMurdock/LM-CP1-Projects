@@ -2,9 +2,9 @@
 
 word = input("What is your word?:")
 
-if :
+if word [::-1] == word:
  answer = "is"
 else:
  answer = "is not"
 
-print(word + answer + "a palindrome")
+print(word, answer,"a palindrome")
