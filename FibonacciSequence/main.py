@@ -1,31 +1,17 @@
 #Luke Murdock, Fibonacci Sequence
 
-def sequence(y, x):
-    z = y + x
-    return z
-
 num1 = 0
 num2 = 1
+answer = ""
 
-print(num1, num2)
+amount = int(input("How many numbers do you want?:"))
 
-fib1 = num1
-fib2 = num2
+for i in range(0, amount):
+    new_num = num1 + num2
 
-num1 = num2
-num2 = sequence(num1, num2)
+    answer += str(num1) + " "
 
-print(num1, num2)
+    num1 = num2
+    num2 = new_num
 
-fib3 = num1
-fib4 = num2
-
-num1 = num2
-num2 = sequence(num1, num2)
-
-print(num1, num2)
-
-fib5 = num1
-fib6 = num2
-
-print(fib1, fib2, fib3, fib4, fib5, fib6,)
+print(answer)
