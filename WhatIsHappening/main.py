@@ -17,7 +17,7 @@ class BankAccount:
 #withdraw subtracts the amount from the balance 
 
     def withdraw(self, amount):
-        #checks if the amount that you are withdrawing can be withdrawed and then withdraws if it can be and also responds true, if not, it returns false
+        #checks if the amount that you are withdrawing can be withdrawed and then withdraws it if so and also responds true, if not, it returns false
         if 0 < amount <= self.balance:
             self.balance -= amount
             return True
@@ -64,24 +64,28 @@ def main():
                     #If the amount is invalid, the computer tells the user
                     else:
                         print("Invalid deposit amount.")
-                        #
+                        #if the user inputs 3 then the are able to withdrawl an amount
                 elif choice == '3':
                     amount = float(input("Enter withdrawal amount: "))
+                    #If the amount is withdrawable then the computer will withdraw it and tell the user it did
                     if account.withdraw(amount):
                         print(f"Withdrawn ${amount:.2f} successfully!")
+                    #If the amount is not withdrawn then it will tell the user that
                     else:
                         print("Invalid withdrawal amount or insufficient funds.")
+                #If the user inputted 4 then the computer will tell the user their balance
                 else:
                     print(f"Current balance: ${account.get_balance():.2f}")
+            #Tells the user that the computer can't find their account with the account number the ygave it
             else:
                 print("Account not found.")
-        
+        #If the user inputted 5 then the computer says bye and ends the program
         elif choice == '5':
             print("Thank you for using our banking system. Goodbye!")
             break
-        
+        #If the user didn't type 1, 2 ,3 ,4 or 5 then the comupter will say to try again
         else:
             print("Invalid choice. Please try again.")
-
+#If the name of the file is main then the computer will run the main function
 if __name__ == "__main__":
     main()
