@@ -16,7 +16,8 @@ def make_choice(options):
                 return choice
             else:
                 print("Invalid choice. Try again.")
-        except ValueError:print("Please enter a number.")
+        except ValueError:
+            print("Please enter a number.")
 
 def explore_forest():
     print("You venture deeper into the forest...")
@@ -58,8 +59,9 @@ def play_game():
                     treasure_found=True
         elif choice==4:
             print("You decide to leave the forest. Game over!")
-        return
+            return
     if treasure_found:
         print("Congratulations! You've won the game!")
-    if __name__=="main":
-        play_game()
+
+if __name__== "__main__":
+    play_game()
