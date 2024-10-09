@@ -56,7 +56,10 @@ def play_game():
                 if random.random()<0.4:
                     find_treasure()
                     treasure_found=True
-        elif choice==4:print("You decide to leave the forest. Game over!")
+        elif choice==4:
+            print("You decide to leave the forest. Game over!")
         return
-    if treasure_found:print("Congratulations! You've won the game!")
-    if name=="main":play_game()
+    if treasure_found:
+        print("Congratulations! You've won the game!")
+    if __name__=="main":
+        play_game()
