@@ -51,7 +51,8 @@ def play_game():
             if random.random()<0.3:
                 find_treasure()
                 treasure_found=True
-            else:print("No treasure here. Keep searching!")
+            else:
+                print("No treasure here. Keep searching!")
         elif choice==3:
             if face_challenge():
                 if random.random()<0.4:
