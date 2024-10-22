@@ -20,9 +20,8 @@ else:
     print("Your password has been accepted!")
 
 
-    splitWord = word.split()
     for number in numbers:
-        if number in splitWord:
+        if number in word:
             hasnum = True
     if hasnum == False:
         print("Needs at least 1 number")

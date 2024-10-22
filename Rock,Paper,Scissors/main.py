@@ -2,7 +2,7 @@
 score = 0
 
 while True:
-    exit = input("Exit(1) Continue(2)")
+    exit = int(input("Exit(1) Continue(2)\n"))
     if exit == 1:
         print("Score:", score, "\nEnd of Game")
         break
