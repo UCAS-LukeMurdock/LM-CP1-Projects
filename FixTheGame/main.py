@@ -24,6 +24,6 @@ def start_game():
             print("Too high! Try again.")
         elif guess < number_to_guess:
             print("Too low! Try again.")
-        continue
+        #Unecessary continue. Logic. The computer would have done the same thing the continue would do either way.
     print("Game Over. Thanks for playing!")
 start_game()
