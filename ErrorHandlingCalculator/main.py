@@ -43,5 +43,6 @@ while True:
     else:
         answer = "error"
     break
+
 if error == False:
     print(num1, operation, num2, "=", answer)
