@@ -16,9 +16,8 @@ letters = ['A', 'B', 'C', 'D', 'E']
 
 for letter in letters:
     letterCount = 0
-    for letter in grid:
-        letterCount += 1
+    for list in grid:
+        for char in list:
+            if letter in char:
+                letterCount += 1
     print(letter, ": ", letterCount)
-
-
-#print("A:", a, "B:", b, "C:", c, "D:", d, "E:", e)
