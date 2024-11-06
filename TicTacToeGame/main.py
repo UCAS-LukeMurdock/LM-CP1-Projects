@@ -18,28 +18,8 @@ def check():
     global winU
     global winC
     global tie
-    columnCheck = [1, 2, 3]
+    columnCheck = [0, 1, 2]
     columnX = 0
-
-    # X Rows
-    for row in board:
-        if row == ["X", "X", "X"]:
-            end = True
-            winU = True
-    # X Columns
-    for columnNum in columnCheck:
-        for row in board:
-            if row[columnNum] == "X":
-                columnX += 1
-        if columnX == 3:
-            end = True
-            winU = True
-
-    # O Columns
-    for row in board:
-        if row == ["O", "O", "O"]:
-            end = True
-            winC = True
 
     # Ties
     tie = True
@@ -50,24 +30,71 @@ def check():
                 tie = False
                 end = False
 
-    
+    # X Rows
+    for row in board:
+        if row == ["X", "X", "X"]:
+            end = True
+            winU = True
+    # X Columns
+    for columnNum in columnCheck:
+        columnX = False
+        for row in board:
+            if row[columnNum] == "X":
+                columnX += 1
+            if columnX == 3:
+                end = True
+                winU = True
+    # X Diagonal
+    if board[0][0] == "X" and board[1][1] == "X" and board[2][2] == "X":
+        end = True
+        winU = True
+    if board[0][2] == "X" and board[1][1] == "X" and board[2][0] == "X":
+        end = True
+        winU = True
+
+    # O Rows
+    for row in board:
+        if row == ["O", "O", "O"]:
+            end = True
+            winC = True
+    # X Columns
+    for columnNum in columnCheck:
+        for row in board:
+            columnX = False
+            if row[columnNum] == "O":
+                columnX += 1
+            if columnX == 3:
+                end = True
+                winU = True
+    # X Diagonal
+    if board[0][0] == "O" and board[1][1] == "O" and board[2][2] == "O":
+        end = True
+        winU = True
+    if board[0][2] == "O" and board[1][1] == "O" and board[2][0] == "O":
+        end = True
+        winU = True
 
 
-input("Welcome to Tic-Tac-Toe! In this game you will play against a computer by deciding which space(number) to place your X's.\n")
+print("Welcome to Tic-Tac-Toe! In this game you will play against a computer by deciding which space(number) to place your X's.")
 while True:
     correctSpot = False
+
     for row in board:
         print(row)
+    check()
+    if end == True:
+        break
 
     choiceU = input("Where do you want to place X?\n")
     for rowIndex, row in enumerate(board):
         for spaceIndex, space in enumerate(row):
             if str(space) == choiceU:
                 board[rowIndex][spaceIndex] = "X"
-    if end == True:
-        break
     for row in board:
         print(row)
+    check()
+    if end == True:
+        break
 
     while correctSpot == False:
         choiceC = random.randrange(1, 10)
@@ -76,10 +103,8 @@ while True:
                 if str(space) == str(choiceC):
                     board[rowIndex][spaceIndex] = "O"
                     correctSpot = True
+
     print("")
-    check()
-    if end == True:
-        break
 
 if winU == True:
     print("You Won!")
