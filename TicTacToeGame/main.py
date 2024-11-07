@@ -1,6 +1,6 @@
 #Luke Murdock, Tic-Tac-Toe-Game
 
-import random
+import random as r
 end = False
 winU = False
 winC = False
@@ -97,7 +97,7 @@ while True:
         break
 
     while correctSpot == False:
-        choiceC = random.randrange(1, 10)
+        choiceC = r.randrange(1, 10)
         for rowIndex, row in enumerate(board):
             for spaceIndex, space in enumerate(row):
                 if str(space) == str(choiceC):
