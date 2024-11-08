@@ -1,4 +1,4 @@
-#Luke Murdock
+#Luke Murdock, TimeT
 
 """
 SET time as 0
@@ -36,8 +36,8 @@ while time <= 540:
     min = time%60
     print(str(hour) + ":" + str(min))
 
-    act2 = int(input("What do you want to do?\n Rock, Paper, Scissors(1) Create a Character(2) Tic-Tac-Toe(3) (4) Nothing(5)\n"))
-    if act1 == 1:
+    act2 = int(input("What do you want to do?\n Rock, Paper, Scissors(1) Create a Character(2) Tic-Tac-Toe(3) Madlibs(4) Nothing(5)\n"))
+    if act2 == 1:
         time_pass = 0
 
         import random as r
@@ -87,7 +87,7 @@ while time <= 540:
                 print("Tie!")
             else:
                 print("Incorrect Number")
-    elif act1 == 2:
+    elif act2 == 2:
         health = 5
         strength = 5
         dexterity = 5
@@ -146,7 +146,7 @@ while time <= 540:
         print(f"{name} has a health of {health}, strength of {strength}, dexterity of {dexterity}, and intelligence of {intel}.")
         score += 10
         time_pass = 60
-    elif act1 == 3:
+    elif act2 == 3:
         end = False
         winU = False
         winC = False
@@ -262,7 +262,7 @@ while time <= 540:
             print("Draw!")
 
         time_pass = 120
-    elif act1 == 4:
+    elif act2 == 4:
         noun = input("What is your noun?: ")
         adjective = input("What is your adjective?: ")
         verb = input("What is your verb that ends in ing?: ")
@@ -273,7 +273,7 @@ while time <= 540:
 
         score += 25
         time_pass = 100
-    elif act1 == 5:
+    elif act2 == 5:
         time_pass = 60
     time += time_pass
     hour = time//60
