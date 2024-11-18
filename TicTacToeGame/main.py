@@ -57,7 +57,7 @@ def check():
         if row == ["O", "O", "O"]:
             end = True
             winC = True
-    # X Columns
+    # O Columns
     for columnNum in columnCheck:
         for row in board:
             columnX = False
@@ -66,7 +66,7 @@ def check():
             if columnX == 3:
                 end = True
                 winU = True
-    # X Diagonal
+    # O Diagonal
     if board[0][0] == "O" and board[1][1] == "O" and board[2][2] == "O":
         end = True
         winU = True
