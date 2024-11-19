@@ -7,7 +7,6 @@ num4 = int(input("Number 4:"))
 num5 = int(input("Number 5:"))
 num6 = int(input("Number 6:"))
 numlist = [num1, num2, num3, num4, num5, num6]
-numsList = [1, 2, 3, 4, 5, 6]
 
 for index, num in enumerate(numlist):
     numA = ""
