@@ -1,7 +1,4 @@
 #Luke Murdock, Final Project
-# Idea: You can look at the inventory to see if they have temperature items and then say something about it
-# David says he thinks there's a way to do if statements all inside of one line (so inside of a print statement)
-# Idea: crits (for opponent especially)
 
 import random
 winGame = False
