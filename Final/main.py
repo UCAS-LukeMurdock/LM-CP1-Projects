@@ -39,25 +39,25 @@ def inventAccess():
         inventChoice = input("Type which one you want to know about or 1 to leave:\n")
         print("")
         if inventChoice == "Sword" and inventChoice in invent:
-            print("Damage: 10  Description: An ancient sword found on the beach")
+            print("Damage: 10\nDescription: An ancient sword found on the beach")
         elif inventChoice == "Sand Gem" and inventChoice in invent:
-            print("Damage: Sight  Description: From the eye of a sandstorm, this gem has a chance to blind its victim for a turn")
+            print("Damage: Sight\nDescription: From the eye of a sandstorm, this gem has a chance to blind its victim for a turn")
         elif inventChoice == "Bow" and inventChoice in invent:
-            print("Damage: 20  Description: Takes a turn to charge up and then launches a powerful arrow")
+            print("Damage: 20\nDescription: Takes a turn to charge up and then launches a powerful arrow")
         elif inventChoice == "Ice Wand" and inventChoice in invent:
-            print("Damage: 0  Description: This wand freezes its victim for two turn, but needs time to recharge")
+            print("Damage: 0\nDescription: This wand freezes its victim for two turn, but needs time to recharge")
         elif inventChoice == "Rock Gem" and inventChoice in invent:
-            print("Damage: Strength  Description: Created from the pressure of a mountain, this gem can shoot rocks that can confuse their vivtim.")
+            print("Damage: Strength\nDescription: Created from the pressure of a mountain, this gem can shoot rocks that can confuse their vivtim.")
         elif inventChoice == "Inferno Sword" and inventChoice in invent:
-            print("Damage: 25  Description: This blade burns like the heart of a volcano")
+            print("Damage: 25\nDescription: This blade burns like the heart of a volcano")
         elif inventChoice == "HP Potion" and inventChoice in invent:
-            print("Can be used once in battle to heal 70 HP")
+            print("Can be used once in battle to heal 100 HP")
         elif inventChoice == "HP":
             print("This is your maximum health. If your health gets to zero, you lose the game. You regenerate all your health after each battle. Also, you can sometimes increase your maximum health")
         elif inventChoice == "Strength":
-            print("This increases the damage of a sword")
+            print("This increases the damage of a sword and other heavy items")
         elif inventChoice == "Sight":
-            print("This increases the damage of a bow")
+            print("This increases the damage of a bow and other light items")
         elif inventChoice == "1":
             break
         else:
@@ -120,18 +120,25 @@ def battle(hpOmax, damageO, nameO, bossBattle = False):
                         continue
 
                 elif action == "2":
-                    print("You waited")
                     waitChance = random.randint(1,4)
                     if waitChance == 1:
-                        hpP += 30
+                        if hpP >= hpPmax:
+                            print("You already feel good")
+                        elif hpP <= hpPmax:
+                            hpP += 30
+                            print("You focused and now feel enhanced")
                     elif waitChance == 2:
                         stren += 5
+                        print("You focused and now feel enhanced")
                     elif waitChance == 3:
                         hpP += 5
+                        print("You focused and now feel enhanced")
+                    elif waitChance == 4:
+                        print("You failed to center your concentration")
                     break
 
                 elif action == "HP Potion":
-                    hpP += 70
+                    hpP += 100
                     invent.remove("HP Potion")
                     print("You drank the potion")
                     break
@@ -153,7 +160,7 @@ def battle(hpOmax, damageO, nameO, bossBattle = False):
                         blind = random.choice([True, True, False])
                         if blind == True:
                             print(f"You hit and blinded {nameO}!")
-                        if blind == False:
+                        elif blind == False:
                             print(f"You just hit {nameO}!")
                         break
 
@@ -179,18 +186,19 @@ def battle(hpOmax, damageO, nameO, bossBattle = False):
                         break
 
                 if dodgeO == True:
-                    print("You missed!")
+                    print("The Twin dodged!")
                     break
+
         # OPPONENT'S TURN         ADDDDD CRITSSSSS
         dodgeO = False
-        if frozen == True or blind == 1:
-            print(f"{nameO} can't do anything".capitalize())
+        if frozen == True or blind == True:
+            print(f"{nameO.title()} can't do anything")
             
             if frozen == True:
                 frozenCounter += 1 
                 if frozenCounter >= 2:
                     frozen = False
-        if frozen == False or blind != 1:
+        elif frozen == False or blind == False:
             
             if bossBattle == True:
                 while True:
@@ -198,7 +206,7 @@ def battle(hpOmax, damageO, nameO, bossBattle = False):
 
                     if actionO == False:
                         dodgeOChance = random.randint(1, 100)
-                        if dodgeOChance <= 60:
+                        if dodgeOChance <= 70:
                             dodgeO = True
                             break
                         elif dodgeOChance <= 100:
@@ -221,7 +229,7 @@ def battle(hpOmax, damageO, nameO, bossBattle = False):
                     hpP -= damageO / confus
                     print("You got hit!")
         confus = 1
-        blind = 0
+        blind = False
 
             
     print(f"\nYour HP: {hpP}/{hpPmax}  {nameO.title()}'s HP: {hpO}/{hpOmax}")
@@ -241,7 +249,7 @@ def battle(hpOmax, damageO, nameO, bossBattle = False):
             strength += 4
             sight += 4
     elif hpP <= 0:
-        print("You lost! :(")
+        print("You lost the battle! :(")
         lostBattle = True
 
     if bossBattle == True and hpP < 20 and lostBattle == False:
@@ -308,7 +316,7 @@ def desert():
     if lostBattle == False:
         print("The stormfiend falls over. Its crystal heart rolls on the sand towards your feet. You pick up the sand gem.")
         invent.append("Sand Gem")
-    if lostBattle == True:
+    elif lostBattle == True:
         return
     
     askInventory()
@@ -336,7 +344,7 @@ def tundra():
         print("\n\nYour cold hands shiver as they wipe off the snow from the hidden object. You uncover a chunk of smooth ice that you see your reflection in. The ice slightly distorts the image, but captures your key features. You abandon the ice and trudge on.\n")
     elif iceChoi == 2:
         print("You ignore the bump in the snow and keep walking.\n")
-    print("You reach a stone pillar with a riddle etched on it and a square to write your answer:")
+    print("You reach a stone pillar with a riddle etched on it and a square to write your answers:")
     print("They look the same, yet they're not one, ".center(100))
     print("Two bodies, but their lives are spun, ".center(100))
     print("From the same thread, side by side ".center(100))
@@ -345,7 +353,7 @@ def tundra():
     print("Though their paths are different, they would often walk as two, ".center(100))
     print("They’ve split their ways, yet their fates are still intertwined. ".center(100))
     print("What are they?".center(100))
-    tundraAnswer = input("Write Answer:")
+    tundraAnswer = input("Write Guesses:")
     if "twin" in tundraAnswer.lower():
         print("The words 'twin' lit up and a blue wand emerged from the stone. You solved the riddle and got an Ice Wand!")
         invent.append("Ice Wand")
@@ -374,7 +382,7 @@ def forest():
     if lostBattle == False:
         print("The defeated elf salutes you. She offers her bow and you take it. She then vanishes into the wilderness.")
         invent.append("Bow")
-    if lostBattle == True:
+    elif lostBattle == True:
         return
     
     askInventory()
@@ -395,11 +403,11 @@ def volcano():
     global invent
     global adventure
     adventure.append("Volcano -> ")
-    print("The closer you come towards the volcano, the hotter everything feels. Lava pops and bubbles out of holes in the rock, making tiny streams and rivers of lava. You are about to reach the caldera of the volcano but you can no longer find a way up.")
+    print(f"The closer you come towards the volcano, the hotter everything feels. {'Your Ice Wand keeps the temperatures stable, though. ' if 'Ice Wand' in invent else ''}Lava pops and bubbles out of holes in the rock, making tiny streams and rivers of lava. You are about to reach the caldera of the volcano but you can no longer find a way up.")
     volcanoPlan = input("""A single red river flows from the top of the volcano and gradually comes down.
-                        How do you plan to get up? HINT: Think about your items 
-                        Write your plan:
-                        """)
+How do you plan to get up? HINT: Think about your items 
+Write your plan:
+""")
     volcanoPlan = volcanoPlan.lower()
     if "cold" in volcanoPlan or "frozen" in volcanoPlan or "freeze" in volcanoPlan or "wand" in volcanoPlan or "ice" in volcanoPlan:
         print("You use your Ice Wand to freeze the lava river. You clamber up your newly created road to reach the caldera. Your Ice Wand glows a bright ice blue and all of the lava begins to slow down. In a few seconds the whole volcano is no longer hot, except for a glowing, red blade in the center of the caldera. You run down and grab the flaming inferno sword. You leave the volcano on the other side and see the deep blue of the ocean on the horizon.")
@@ -424,7 +432,7 @@ def mountain():
     global invent
     global adventure
     adventure.append( "Mountain -> ")
-    print("There is a tiny patch of snow on top of the towering mountain. The high elevation makes the air thin and hard to breathe. You grow tired and cold as you climb. Finally, you reach this clearing of white and find a stone pedestal with a singular bottle in the middle.")
+    print(f"There is a tiny patch of snow on top of the towering mountain. The high elevation makes the air thin and hard to breathe. You grow tired and cold as you climb. {'Your Inferno Sword is the only thing keeping you warm. ' if 'Inferno Sword' in invent else ''}Finally, you reach this clearing of white and find a stone pedestal with a singular bottle in the middle.")
     print("Do you take the light red bottle? Yes(1) No(2)")
     mountChoi = ask(2)
     if mountChoi == 1:
@@ -450,16 +458,18 @@ def cliff():
     global invent
     global adventure
     adventure.append( "Cliff -> ")
-    print("The mountainous area has scattered boulders, rocks, and pebbles throughout and ends at a sheer cliff. You walk backwards away from the steep canyon, and bump into a boulder. The boulder shivers and starts to break apart into smaller segments. In a minute, the boulder formed into a human shaped rock cluster. This animate rock, then runs towards you.")
+    print("The mountainous area has scattered boulders, rocks, and pebbles throughout and ends at a sheer cliff. You walk backwards away from the steep canyon, and bump into a boulder. The boulder shivers and starts to break apart into smaller segments. In a minute, the boulder formed into a human shaped rock cluster. The animate rock then runs towards you.")
     battle(90, 25, "the Rockfiend")
     if lostBattle == False:
-        print("The boulder crumbles further and turns into pebbles. One piece doesn’t fall apart which is a crystal that shins greyness on everything around it. You pick this up and hope it will be useful.")
-    invent.append("Rock Gem")
-    if lostBattle == True:
+        print("The boulder crumbles further and turns into pebbles. One piece doesn’t fall apart which is a crystal that shines greyness on everything around it. You pick this up and hope it will be useful.")
+        invent.append("Rock Gem")
+    elif lostBattle == True:
+        print("The Rockfiend knocks you off the cliff.")
+        canyon()
         return
     
     askInventory()
-    print("You peer down the side of the cliff and see a slow river at the bottom of the canyon. To your left is a mountain you can climb. \nWhere do you go? Canyon(1) Mountain(2)")
+    print("You peer down the side of the cliff and see a slow river at the bottom of the canyon. You can also make out several glowing, multicolored dots. To your left is a mountain you can climb. \nWhere do you go? Canyon(1) Mountain(2)")
     locChoi1 = ask(2)
     if locChoi1 == 1:
         canyon()
@@ -471,16 +481,22 @@ def cliff():
         print("Something Went Wrong")
 
 def canyon():
+    global lostBattle
     global sight
     sight += 2
     global adventure
     adventure.append( "Canyon -> ")
-    print("You run towards the cliff and jump off.”")
-    print("")
-    print("")
-    print("You fall into the river and clamber out onto the otherside. It is dark and damp down in the canyon but at least you survived.")
+    if lostBattle == False:
+        print("You run towards the cliff and jump off.”")
+    elif lostBattle == True:
+        lostBattle = False
+    print("____")
+    print("    |")
+    print("    |")
+    print("    |")
+    print("You fall into the river and clamber out onto the other side. It is dark and damp down in the canyon but at least you survived.")
     askInventory()
-    print("You look around and see six dots on the canyon wall, a dot glows per terrain you have visited on the island. There is one button in the middle of the dots. \nDo you try pressing the button? Yes(1) No(2)")
+    print("You look around and see six dots on the canyon wall, a different colored dot glows per terrain you have visited on the island. There is one button in the middle of the dots. \nDo you try pressing the button? Yes(1) No(2)")
     canyonChoi = ask(2)
     if canyonChoi == 1:
         eleIncrease = 0
@@ -507,7 +523,7 @@ def flower(early):
     global ending2
     global adventure
     adventure.append( "Flower Field -> ")
-    print("The humongous field is filled with millions of neon pink flowers. While admiring this beauty, a person walks towards you. As they come closer, you can make out their familiar features. You realize that this is because they have your features. This new, somehow familiar figure unsheaths a striking sword. Its blade s with blue energy, which seems to double the sword’s size. You almost fall unconscious at the complexity of the weapon’s details. What stops you is the fact that this blade is coming straight towards you.")
+    print("The humongous field is filled with millions of neon pink flowers. While admiring this beauty, a person walks towards you. As they come closer, you can make out their familiar features. You realize that this is because they have your features. This new, somehow familiar figure unsheaths a striking sword. Its blade shines with blue energy, which seems to double the sword’s size. You almost fall unconscious at the complexity of the weapon’s details. What stops you is the fact that this blade is coming straight towards you.")
     ending2 = False
     if early == True:
         battle(hpPmax, 25, "the Twin", bossBattle = True)
@@ -517,14 +533,14 @@ def flower(early):
         winGame = True
     elif lostBattle == True:
         return
-    if ending2 == True:
+    if ending2 == False:
         print("You defeat your rude twin and show who is truly superior. You acquire his sword, find a clearing in the flowers with a slit in the ground, and insert the sapphire sword. Inside is loads of gold, jewels, and other precious materials. You take these riches and use them to buy the pirate ship from the old captain of the pirate crew. Your crew sets sail, more happy than they have ever been.")
-    elif ending2 == False:
+    elif ending2 == True:
         print("Your twin realizes he lost and asks for forgiveness from you. He aids this with the promise of sharing this island and with treasures untold. \nDo you agree? Yes(1) No(2)")
         endChoi = ask(2)
         if endChoi == 1:
             print("You and your twin come to terms, so you teach each other some tricks, such as magic or pillaging. You and your twin rule this island peacefully, till the end of time.")
-        if endChoi == 2:
+        elif endChoi == 2:
             print("You leave your twin behind and find treasure underneath the plentiful pink flowers. You use this to join the pirates again and you leave this island, and its problems behind forever, but keep its bountiful rewards.")
 
 def oceanEnd():
