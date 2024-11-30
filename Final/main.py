@@ -644,7 +644,7 @@ def canyon():
         print("A dot glows dark grey for the mountain.")
         dots += 1
     darkDots = 10 - dots
-    print(f"{darkDots} dot{'s' if darkDots > 1 else ''} are left dark.")
+    print(f"{darkDots} dot{'s are' if darkDots > 1 else ' is'} left dark.")
     print("There is one button in the middle of the dots. \nDo you try pressing the button? Yes(1) No(2)")
     canyonChoi = ask(2)
     if canyonChoi == 1:
