@@ -531,7 +531,7 @@ def mountain():
             invent.append("Potion")
             gotPotion = True
         if mountChoi == 2:
-            print("You leave the bottle alone, but while contemplating you see a note on the stone that says, 'Focusing has a chance to increase your dodging ability the next time you try to dodge.' You then keep on journeying.")
+            print("You leave the bottle alone, but while contemplating you see a note on the stone that says, 'Focusing has a chance to increase your dodging ability the next time you try to dodge. It also has a chance of making you take 10 less damage the next time you get hit.' You then keep on journeying.")
         
     elif gotPotion == True:
         print(f"You climb the mountain once again{' with the warmth of your sword at your side.' if 'Inferno Sword' in invent else '.'}")
@@ -685,7 +685,7 @@ def canyon():
             mountain()
             return
     elif canyonChoi == 2:
-        print("Instead of pressing the button, you see a inscription on the wall. It writes, 'Focusing has a chance of making you take 10 less damage the next time you get hit.' You then decide to follow along the river till you reach the top of this island’s mountain.")
+        print("Instead of pressing the button, you see a inscription on the wall. It writes, 'The more places you have completed, the more likely the button is to work' You then decide to follow along the river till you reach the top of this island’s mountain.")
         mountain()
         return
 
