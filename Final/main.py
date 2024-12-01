@@ -7,6 +7,7 @@ strength = 0
 sight = 0
 axe = True
 axeCl = False
+gotPotion = False
 invent = ["Axe", "Sword"]
 adventure = ["Ocean -> "]
 
@@ -24,7 +25,7 @@ ending2 = False
 islandRule = False
 
 
-def ask(choiceRange):
+def ask(choiceRange, ocean = False):
     while True:
         try:
             choice = int(input(""))
@@ -34,6 +35,13 @@ def ask(choiceRange):
         if choice < 0 or choice > choiceRange:
             print("Number not accepted. Try again")
             continue
+        if ocean == True and choice == 2:
+            print("Are you sure you want to lose the game? Yes(1) No(2)")
+            oceanChoi = ask(2)
+            if oceanChoi == 2:
+                print("Where do you want to go then?")
+                continue
+            
         break
     return choice
 
@@ -46,10 +54,10 @@ def askInventory():
 def inventAccess():
     while True:
         print(f"\nInventory: {invent} \nStats: {hpPmax} HP | {strength} Strength | {sight} Sight")
-        inventChoice = input("Type which one you want to know about or 1 to leave:\n").title()
+        inventChoice = input("Type which Item/Stat you want to know about or 1 to leave:\n").title()
         print("")
         if inventChoice == "Axe" and inventChoice in invent:
-            print("Damage: 15\nDescription: You got this throwing axe from the pirates. It is a light weapon that is also increased with strength")
+            print("Damage: 15\nDescription: You got this throwing axe from the pirates. To use this weapon you have to throw it, so be careful. This item is light but is also increased with strength.")
         elif inventChoice == "Sword" and inventChoice in invent:
             print("Damage: 10\nDescription: An ancient sword found on the beach")
         elif inventChoice == "Sand Gem" and inventChoice in invent:
@@ -63,9 +71,9 @@ def inventAccess():
         elif inventChoice == "Inferno Sword" and inventChoice in invent:
             print("Damage: 25\nDescription: This blade burns like the heart of a volcano")
         elif inventChoice == "Potion" and inventChoice in invent:
-            print("Can be used up in battle to heal 100 HP")
+            print("Can be used up in battle to heal you to your max HP")
         elif inventChoice == "Hp":
-            print("This is your maximum health. If your health gets to zero, you lose the game. You regenerate all your health after each battle. Also, you can sometimes increase your maximum health")
+            print("This is your maximum health. If your health reaches zero, you lose the game. You regenerate all your health after each battle. Also, you can sometimes increase your maximum health")
         elif inventChoice == "Strength":
             print("This increases the damage of a sword and other heavy items")
         elif inventChoice == "Sight":
@@ -112,7 +120,7 @@ def battle(hpOmax, damageO, nameO, bossBattle = False):
         elif bowWait == False:
             while True:
                 while True:
-                    action = input(f"Dodge(1) Focus(2) Item(Type It) {invent}\n").title() #title's answer to make it work wihout capitalization
+                    action = input(f"Dodge(1) Focus(2) Item(Choose) {invent}\n").title() #title's answer to make it work wihout capitalization
                     if action in invent or action == "1" or action == "Dodge" or action == "2" or action == "Focus": #If their input works
                         break
                     else: #If input doesn't work
@@ -167,7 +175,6 @@ def battle(hpOmax, damageO, nameO, bossBattle = False):
                             print("You focused and now feel enhanced")
                         elif waitChance == 5 or waitChance == 6: #Sight Boost
                             sigh += 2
-                            continue
                             print("You focused and now feel enhanced")
                         elif waitChance == 7 or waitChance == 8: #Dodge Boost
                             if dodgeUp == True:
@@ -187,7 +194,7 @@ def battle(hpOmax, damageO, nameO, bossBattle = False):
                     break
 
                 elif action == "Potion":
-                    hpP += 100
+                    hpP = hpPmax
                     invent.remove("Potion")
                     print("You drank the potion")
                     break
@@ -339,19 +346,24 @@ def plains():
     global adventure
     adventure.append("Plains -> ")
     print("The wind cuts through thousands of blades of grass. The ocean of green rolls over curving hills. In the distance, the mountain looms a bit closer, which creates this beautiful, safe valley. You see sparse, colorful flowers at the bottom of the hills. You stroll through the fields of grass to these bits of vibrant color. As you come closer you see three distinct flowers. The first is a scarlet red, petals coming together to make what looked like a cup. The second is as blue as the ocean you came from, tiny petals sprouting from every branch. The last is a fiery orange, one huge flower with hundreds of petal layers.\n")
-    print("Which do you eat? Red(1) Blue(2) Orange(3) All(4)")
-    plainsChoi = ask(4)
+    print("Which do you eat? Red(1) Blue(2) Orange(3) All(4) None(5)")
+    plainsChoi = ask(5)
     if plainsChoi == 1:
         hpPmax += 20
+        print("You feel something inside of you change, but you don't know what.")
     elif plainsChoi == 2:
         sight += 5
+        print("You feel something inside of you change, but you don't know what.")
     elif plainsChoi == 3:
         strength += 5
+        print("You feel something inside of you change, but you don't know what.")
     elif plainsChoi == 4:
         hpPmax -= 30
         sight += 10
         strength += 10
-    print("You feel something inside of you change, but you don't know what.")
+        print("You feel something inside of you change, but you don't know what.")
+    elif plainsChoi == 5:
+        print("You instead find a pink flower that has a peice of paper attached to it that writes, 'This flower comes from the east flower field where its siblings reside. That field is also home to the rich human who can dodge and sometimes even dodge and attack at the same time! He rarely ever fails dodging.'")
 
     askInventory()
     print("You see a frigid tundra ahead of you and a crowded forest to the right. \nWhere do you go? Tundra(1) Forest(2)")
@@ -404,13 +416,13 @@ def tundra():
         print(f"You enter the freezing tundra again. {'You welcome the warmth of you Inferno Sword.' if 'Inferno Sword' in invent else 'Your start to shiver.'}")
 
     if "Ice Wand" not in invent:
-        print("Do you uncover the snow? Yes(1) No(2)")
+        print(f"{'You see that same bump in the snow. ' if firstTimeT == False else''}Do you uncover the snow? Yes(1) No(2)")
         iceChoi = ask(2)
         if iceChoi == 1:
             print("\n\nYour cold hands shiver as they wipe off the snow from the hidden object. You uncover a chunk of smooth ice that you see your reflection in. The ice slightly distorts the image, but captures your key features. You abandon the ice and trudge on.\n")
         elif iceChoi == 2:
-            print("You ignore the bump in the snow and keep walking.\n")
-        print("You reach a stone pillar with a riddle etched on it and a square to write your answers:")
+            print("You ignore the bump in the snow and keep walking. You see a stone pillar that has the words, 'Focusing has a chance to let you heal 15 HP if you are damaged, gain 2 Strength temporarily, or gain 2 Sight temporarily.'\n")
+        print(f"You reach a{'nother' if iceChoi == 2 else ''} stone pillar with a riddle etched on it and a square to write your answers:")
         print("They look the same, yet they're not one, ".center(100))
         print("Two bodies, but their lives are spun, ".center(100))
         print("From the same thread, side by side, ".center(100))
@@ -489,18 +501,19 @@ Write your plan:
     elif "Inferno Sword" not in invent :
         print("You can't find a way to the very top of the volcano.")
     askInventory()
-    print("You see a coastline where your ship has docked and there's a mountain south of you. You haven’t gained any gold yet, so if you go to the ocean, that means you've failed your quest. \nWhere do you go? Ocean(1) Mountain(2)")
-    locChoi6 = ask(2)
+    print("You see a coastline where your ship has docked and there's a mountain south of you. You haven’t gained any gold yet, so if you go to the ocean, that means you've failed your quest. \nWhere do you go? Mountain(1) Ocean(2)")
+    locChoi6 = ask(2, ocean = True)
     if locChoi6 == 1:
-        oceanEnd()
+        mountain()
         return
     elif locChoi6 == 2:
-        mountain()
+        oceanEnd()
         return
     else:
         print("Something Went Wrong")
 
 def mountain():
+    global gotPotion
     global adventure
     adventure.append( "Mountain -> ")
     global firstTimeM
@@ -508,21 +521,24 @@ def mountain():
         global strength
         strength += 2
         global invent
+        firstTimeM = False
+    if gotPotion == False:
         print(f"There is a tiny patch of snow on top of the towering mountain. The high elevation makes the air thin and hard to breathe. You grow tired and cold as you climb. {'Your Inferno Sword is the only thing keeping you warm. ' if 'Inferno Sword' in invent else ''}Finally, you reach this clearing of white and find a stone pedestal with a singular bottle in the middle.")
         print("Do you take the light red bottle? Yes(1) No(2)")
         mountChoi = ask(2)
         if mountChoi == 1:
             print("You tuck the bottle away for safekeeping.")
             invent.append("Potion")
+            gotPotion = True
         if mountChoi == 2:
-            print("You leave the bottle alone and keep on journeying.")
-        firstTimeM = False
-    elif firstTimeM == False:
+            print("You leave the bottle alone, but while contemplating you see a note on the stone that says, 'Focusing has a chance to increase your dodging ability the next time you try to dodge.' You then keep on journeying.")
+        
+    elif gotPotion == True:
         print(f"You climb the mountain once again{' with the warmth of your sword at your side.' if 'Inferno Sword' in invent else '.'}")
 
     askInventory()
     print("You can climb down the mountain to the pink blur you see in the distance or you can go to the coastline and leave this island without any gold to share with the other pirates. To the north is the volcano. To the south is the rocky cliff area. To the west is the tundra. \nWhere do you go? Flower Field(1) Ocean(2) Volcano(3) Cliff(4) Tundra(5)")
-    locChoi7 = ask(5)
+    locChoi7 = ask(5, ocean = True)
     if locChoi7 == 1:
         flower(False)
         return
@@ -669,11 +685,12 @@ def canyon():
             mountain()
             return
     elif canyonChoi == 2:
-        print("You decide to follow along the river till you reach the top of this island’s mountain.")
+        print("Instead of pressing the button, you see a inscription on the wall. It writes, 'Focusing has a chance of making you take 10 less damage the next time you get hit.' You then decide to follow along the river till you reach the top of this island’s mountain.")
         mountain()
         return
 
 def flower(early):
+    global invent
     global hpPmax
     global lostBattle
     global winGame
@@ -697,9 +714,10 @@ def flower(early):
     elif lostBattle == True:
         return
     if ending2 == False:
-        print("You defeat your rude twin and show who is truly superior. You acquire his sword, find a clearing in the flowers with a slit in the ground, and insert the sapphire sword. Inside is loads of gold, jewels, and other precious materials. You take these riches and use them to buy the pirate ship from the old captain of the pirate crew. Your crew sets sail, more happy than they have ever been.")
+        print("You defeat your rude twin and show who is truly superior. You acquire their sword, find a clearing in the flowers with a slit in the ground, and insert the sapphire sword. Inside is loads of gold, jewels, and other precious materials. You take these riches and use them to buy the pirate ship from the old captain of the pirate crew. Your crew sets sail, more happy than they have ever been.")
+        invent.append("Sapphire Sword")
     elif ending2 == True:
-        print("Your twin realizes he lost and asks for forgiveness from you. He aids this with the promise of sharing this island and with treasures untold. \nDo you agree? Yes(1) No(2)")
+        print("Your twin realizes they lost and asks for forgiveness from you. They aids this with the promise of sharing this island and with treasures untold. \nDo you agree? Yes(1) No(2)")
         endChoi = ask(2)
         if endChoi == 1:
             print("You and your twin come to terms, so you teach each other some tricks, such as magic or pillaging. You and your twin rule this island peacefully, till the end of time.")
@@ -714,7 +732,7 @@ def oceanEnd():
     print("You climb down and join your piratemates at the ship. They are very disappointed in you for not bringing treasure, but allow you on the ship. They are excited to see the items you did find and hear your adventures. You take one last glance at the beautiful island before the ship sets sail.")
     lostGame = True
 
-print("\nYou had been sailing at sea for 5 months with your pirate crew, when you finally came to an island with many differing terrains. One mountain towers over them all. The captain decides to send you onto the island to find treasure, to make sure he doesn't lose any valuable members of the crew. The pirate ship crosses the last part of the deep blue ocean and lands on the biggest beach that could be seen. The crew will sail to the other side of the island to pick you up there. You hop off the boat and onto the sand, which looks suspiciously like treasure.\n")
+print("\nYou had been sailing at sea for 5 months with your pirate crew, when you finally came to an island with many differing terrains. One mountain towers over them all. The captain decides to send you onto the island to find treasure to make sure he doesn't lose any valuable members of the crew. The pirate ship crosses the last part of the deep blue ocean and lands on the biggest beach that could be seen. The crew will sail to the other side of the island to pick you up there. You hop off the boat and onto the sand, which looks suspiciously like treasure.\n")
 beach()
 
 
