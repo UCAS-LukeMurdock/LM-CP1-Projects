@@ -411,7 +411,6 @@ def tundra():
         global hpPmax
         hpPmax += 5
         print("Here in the tundra, snow is everywhere. Every single object is covered with the white powder. Evergreen trees surround you, as you walk ever onward, your shoes crunch down the cold ice. You see a jut in the snow and decide to look at it.\n")
-        firstTimeT = False
     elif firstTimeT == False:
         print(f"You enter the freezing tundra again. {'You welcome the warmth of you Inferno Sword.' if 'Inferno Sword' in invent else 'Your start to shiver.'}")
 
@@ -438,6 +437,7 @@ def tundra():
         else:
             print("\nNothing happened, so you left.")
     
+    firstTimeT = False
     askInventory()
     print("You stand at the feet of a volcano and mountain. \nWhere do you go? Volcano(1) Mountain(2)")
     locChoi4 = ask(2)
