@@ -9,8 +9,10 @@ Add answer to time
 Tell time
 
 """
+import random as r
 score = 0
 time = 0
+
 
 print("It's noon. Your bedtime is 9:00")
 while time <= 540:
