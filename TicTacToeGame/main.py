@@ -25,7 +25,7 @@ def check():
     tie = True
     end = True
     for row in board:
-        for space in board:
+        for space in row:
             if space != "X" or space != "O":
                 tie = False
                 end = False
@@ -65,14 +65,14 @@ def check():
                 columnX += 1
             if columnX == 3:
                 end = True
-                winU = True
+                winC = True
     # O Diagonal
     if board[0][0] == "O" and board[1][1] == "O" and board[2][2] == "O":
         end = True
-        winU = True
+        winC = True
     if board[0][2] == "O" and board[1][1] == "O" and board[2][0] == "O":
         end = True
-        winU = True
+        winC = True
 
 
 print("Welcome to Tic-Tac-Toe! In this game you will play against a computer by deciding which space(number) to place your X's.")
