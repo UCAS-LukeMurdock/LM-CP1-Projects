@@ -32,7 +32,7 @@ def ask(choiceRange, ocean = False):
         except:
             print("Input not accepted. Try again")
             continue
-        if choice < 0 or choice > choiceRange:
+        if choice <= 0 or choice > choiceRange:
             print("Number not accepted. Try again")
             continue
         if ocean == True and choice == 2:
@@ -382,7 +382,7 @@ def desert():
     global invent
     global adventure
     adventure.append("Desert -> ")
-    print("The sand of the desert is pale in contrast to the beach. The dunes of sand stretch past the horizon. Your skin starts to feel the scorching air, so you look for some way to cool down. There is no water or shelter in sight, but there is a cloud of dust brewing up ahead. The sandstorm grows and consums you. As you push your way through the wind, you reach the eye of the storm. In the center of the storm is a petrified skeleton made of the desert. Where its heart should be, sits a glowing yellow gemstone. You pull your newly found sword out and ready yourself to face the sandfiend.\n")
+    print("The sand of the desert is pale in contrast to the beach. The dunes of sand stretch past the horizon. Your skin starts to feel the scorching air, so you look for some way to cool down. There is no water or shelter in sight, but there is a cloud of dust brewing up ahead. The sandstorm grows and consumes you. As you push your way through the wind, you reach the eye of the storm. In the center of the storm is a petrified skeleton made of the desert. Where its heart should be, sits a glowing yellow gemstone. You pull your newly found sword out and ready yourself to face the sandfiend.\n")
     battle(70, 15, "the Sandfiend")
     if lostBattle == False:
         print("The stormfiend falls over. It crumbles to dust and its sandy remains get swept away by the wind. Its crystal heart rolls on the sand towards your feet. You pick up the sand gem.")
